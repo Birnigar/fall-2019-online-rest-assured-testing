@@ -11,7 +11,7 @@ import java.io.File;
 import static io.restassured.RestAssured.*;
 
 public class SpartanTests {
-    String BASE_URL = "http://3.90.112.152:8000/";
+    String BASE_URL = "http://54.196.47.224:8000/";
 
 
     @Test
