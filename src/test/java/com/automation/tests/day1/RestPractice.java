@@ -3,12 +3,9 @@ package com.automation.tests.day1;
 import static org.junit.jupiter.api.Assertions.*;
 import static io.restassured.RestAssured.*;
 import io.restassured.response.Response;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.net.URL;
-import java.util.Date;
 
 public class RestPractice {
     @BeforeAll
@@ -57,6 +54,7 @@ public class RestPractice {
         assertTrue(dateHeaderExists);
 
         assertEquals("17",result.getHeader("content-length"));
+
 
     }
 }

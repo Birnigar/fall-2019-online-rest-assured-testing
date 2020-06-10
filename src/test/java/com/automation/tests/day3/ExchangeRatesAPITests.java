@@ -25,7 +25,25 @@ public class ExchangeRatesAPITests {
         baseURI="http://api.openrates.io";
     }
 
+    /**
+     * when send request http://api.openrates.io
+     * then status code must be 200
+     */
+    @Test
+    public void verifyRequestCode(){
+        Response response=given().get("/latest").prettyPeek();//print the response
+        response.then().assertThat().statusCode(200);//verify status code
+    }
 
+    @Test
+    public void verifyBaseIsEUR(){
+        given().get("latest").prettyPeek().then().body("base",is("EUR"));
+
+    }
+    @Test
+    public void getLatestTRYCurrency(){
+        given().get("latest").prettyPeek().then().body("rates.TRY",is(7.6574f));
+    }
     //get latest currency rates
     @Test
     public void getLatestCurrency(){
@@ -58,7 +76,7 @@ public class ExchangeRatesAPITests {
 
 
     }
-
+    //get history of rates
     @Test
     public void getHistoryOfRates(){
         Response response=given().queryParam("base","USD").
@@ -69,7 +87,7 @@ public class ExchangeRatesAPITests {
         System.out.println(headers);
 
 
-        response.then().assertThat().statusCode(200).and().body("date",is("2008-01-02")).and().
+       response.then().assertThat().statusCode(200).and().body("date",is("2008-01-02")).and().
                 body("rates.USD", is(1.0f));
         //adn() doesn't have any functional role ,it is just syntax sugar
         //we can cain validation
@@ -79,9 +97,9 @@ public class ExchangeRatesAPITests {
         //rates - it's a object
         //all currencies are like instance variables
         //to get any distance variable (property), objectName.propertyName
-        float actual=response.jsonPath().get("rates.EUR");
-        System.out.println(actual);
-        assertEquals(1.0,actual);
+       float actual=response.jsonPath().get("rates.EUR");
+       System.out.println(actual);
+        assertEquals(0.6808279156684875f,actual);
         /**
          *  Get a JsonPath view of the response body. This will let you use the JsonPath syntax to get values from the response.
          *      * Example:
